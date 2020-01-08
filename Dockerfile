@@ -23,3 +23,4 @@ VOLUME /var/expressCart/data
 
 EXPOSE 1111
 ENTRYPOINT ["npm", "start"]
+
