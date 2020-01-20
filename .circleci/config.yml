@@ -70,7 +70,6 @@ workflows:
       -
         deploy-develop:
           requires:
-            - test
             - build
           filters:
             branches:
@@ -79,7 +78,6 @@ workflows:
         deploy-prod:
           requires:
             - build
-            - test
             - hold
           filters:
             branches:
