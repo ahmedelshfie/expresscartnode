@@ -41,7 +41,7 @@ jobs:
   deploy-develop:
     docker:
       - image: circleci/node:8.9.4
-    working_directory: ~/cicd-circleci
+    working_directory: ~/expressCartNode
 
     steps:
       - checkout
@@ -51,7 +51,7 @@ jobs:
   deploy-master:
     docker:
       - image: circleci/node:8.9.4
-    working_directory: ~/cicd-circleci
+    working_directory: ~/expressCartNode
 
     steps:
       - checkout
