@@ -40,6 +40,8 @@ jobs:
     working_directory: ~/expressCartNode
     steps:
       - checkout
+      - attach_workspace:
+          at: ~/circleci-demo-workflows
       -
         command: null
   deploy-master:
@@ -49,6 +51,8 @@ jobs:
     working_directory: ~/expressCartNode
     steps:
       - checkout
+      - attach_workspace:
+          at: ~/circleci-demo-workflows
       -
         command: null
 workflows:
