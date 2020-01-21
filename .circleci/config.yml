@@ -38,7 +38,7 @@ jobs:
       - run: npm run test
 
   # Deploying
-  deploy-development:
+  deploy-develop:
     docker:
       - image: circleci/node:8.9.4
     working_directory: ~/cicd-circleci
@@ -48,7 +48,7 @@ jobs:
 
       - command: # shell
 
-  deploy-prod:
+  deploy-master:
     docker:
       - image: circleci/node:8.9.4
     working_directory: ~/cicd-circleci
