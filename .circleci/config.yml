@@ -13,7 +13,7 @@ jobs:
             - 'v1-dependencies-{{ checksum "package.json" }}'
             - v1-dependencies-
       -
-        run: 'yarn install'
+        run: 'npm install'
       -
         save_cache:
           paths:
@@ -32,7 +32,7 @@ jobs:
             - 'v1-dependencies-{{ checksum "package.json" }}'
             - v1-dependencies-
       -
-        run: 'yarn test'
+        run: 'npm install'
   deploy-develop:
     docker:
       -
