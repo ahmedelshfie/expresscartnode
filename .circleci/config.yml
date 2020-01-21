@@ -35,7 +35,7 @@ jobs:
           - v1-dependencies-{{ checksum "package.json" }}
           - v1-dependencies-
 
-      - run: npm install
+      - run: npm run test
 
   # Deploying
   deploy-develop:
@@ -84,6 +84,7 @@ workflows:
           requires:
             - test
             - build
+            - hold
           filters:
             branches:
               only: develop
