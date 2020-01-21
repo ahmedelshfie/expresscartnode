@@ -84,7 +84,6 @@ workflows:
           requires:
             - test
             - build
-            - hold
           filters:
             branches:
               only: develop
