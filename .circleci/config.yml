@@ -2,82 +2,96 @@ version: 2
 jobs:
   build:
     docker:
-      -
-        image: 'circleci/node:8.9.4'
+      - image: circleci/node:8.9.4
+
     working_directory: ~/cicd-circleci
+
     steps:
       - checkout
-      -
-        restore_cache:
+
+      - restore_cache:
           keys:
-            - 'v1-dependencies-{{ checksum "package.json" }}'
-            - v1-dependencies-
-      -
-        save_cache:
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-
+
+      - run: npm install
+
+      - save_cache:
           paths:
             - node_modules
-          key: 'v1-dependencies-{{ checksum "package.json" }}'
+          key: v1-dependencies-{{ checksum "package.json" }}
+
   test:
     docker:
-      -
-        image: 'circleci/node:8.9.4'
+      - image: circleci/node:8.9.4
+
     working_directory: ~/cicd-circleci
+
     steps:
       - checkout
-      -
-        restore_cache:
+
+      - restore_cache:
           keys:
-            - 'v1-dependencies-{{ checksum "package.json" }}'
-            - v1-dependencies-
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-
+
+      - run: npm run test
+
+  # Deploying
   deploy-development:
     docker:
-      -
-        image: 'circleci/node:8.9.4'
+      - image: circleci/node:8.9.4
     working_directory: ~/cicd-circleci
+
     steps:
       - checkout
-      -
-        command: null
+
+      - command: # shell
+
   deploy-prod:
     docker:
-      -
-        image: 'circleci/node:8.9.4'
+      - image: circleci/node:8.9.4
     working_directory: ~/cicd-circleci
+
     steps:
       - checkout
-      -
-        command: null
+
+      - command: # shell
+
+
+
 workflows:
   version: 2
   build-and-deploy-on-hold:
     jobs:
-      -
-        build:
+      - build:
           filters:
             branches:
               only:
                 - master
                 - develop
-      -
-        test:
+
+      - test:
           requires:
             - build
-      -
-        hold:
+
+      - hold:
           type: approval
           requires:
             - test
-      -
-        deploy-develop:
+
+      - deploy-develop:
           requires:
+            - test
             - build
           filters:
             branches:
               only: develop
-      -
-        deploy-prod:
+
+      - deploy-master:
           requires:
             - build
+            - test
             - hold
           filters:
             branches:
