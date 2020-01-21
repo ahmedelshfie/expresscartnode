@@ -40,7 +40,8 @@ jobs:
     working_directory: ~/expressCartNode
     steps:
       - checkout
-      - attach_workspace:
+      -
+        attach_workspace:
           at: ~/circleci-demo-workflows
       -
         command: null
@@ -51,7 +52,8 @@ jobs:
     working_directory: ~/expressCartNode
     steps:
       - checkout
-      - attach_workspace:
+      -
+        attach_workspace:
           at: ~/circleci-demo-workflows
       -
         command: null
@@ -75,6 +77,15 @@ workflows:
           type: approval
           requires:
             - test
+      -
+        deploy-develop:
+          requires:
+            - build
+            - test
+            - hold
+          filters:
+            branches:
+              only: develop
       -
         deploy-master:
           requires:
