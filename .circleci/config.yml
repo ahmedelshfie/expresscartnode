@@ -30,6 +30,7 @@ jobs:
   deploy-develop:
     docker:
       - image: 'circleci/node:8.9.4'
+      - image: 'circleci/mongo:3.4.10'
     working_directory: ~/expressCartNode
     steps:
       - checkout
