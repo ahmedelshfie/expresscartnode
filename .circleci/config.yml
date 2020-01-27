@@ -4,6 +4,11 @@ jobs:
     docker:
       -
         image: 'circleci/node:8.9.4'
+        image: 'circleci/mongo:3.4.10'
+        environment:
+          MONGO_HOST: mongodb://172.0.0.:27017/expresscart
+          MONGO_DB: expresscart
+          
     working_directory: ~/expressCartNode
     steps:
       - checkout
