@@ -1,0 +1,91 @@
+version: 2
+jobs:
+  build:
+    docker:
+      -
+        image: 'circleci/node:8.9.4'
+    working_directory: ~/expressCartNode
+    steps:
+      - checkout
+      -
+        restore_cache:
+          keys:
+            - 'v1-dependencies-{{ checksum "package.json" }}'
+            - v1-dependencies-
+      -
+        run: 'npm install'
+      -
+        save_cache:
+          paths:
+            - node_modules
+          key: 'v1-dependencies-{{ checksum "package.json" }}'
+  test:
+    docker:
+      -
+        image: 'circleci/node:8.9.4'
+    working_directory: ~/expressCartNode
+    steps:
+      - checkout
+      -
+        restore_cache:
+          keys:
+            - 'v1-dependencies-{{ checksum "package.json" }}'
+            - v1-dependencies-
+      -
+        run: 'npm install'
+  deploy-develop:
+    docker:
+      -
+        image: 'circleci/node:8.9.4'
+    working_directory: ~/expressCartNode
+    steps:
+      - checkout
+      -
+        command: null
+  deploy-master:
+    docker:
+      -
+        image: 'circleci/node:8.9.4'
+    working_directory: ~/expressCartNode
+    steps:
+      - checkout
+      -
+        command: null
+workflows:
+  version: 2
+  build-and-deploy-on-hold:
+    jobs:
+      -
+        build:
+          filters:
+            branches:
+              only:
+                - master
+                - develop
+      -
+        test:
+          requires:
+            - build
+      -
+        hold:
+          type: approval
+          requires:
+            - test
+      -
+        deploy-develop:
+          requires:
+            - test
+            - build
+            - hold
+          filters:
+            branches:
+              only: develop
+      -
+        deploy-master:
+          requires:
+            - build
+            - test
+            - hold
+          filters:
+            branches:
+              only: master
