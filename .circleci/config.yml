@@ -70,7 +70,7 @@ workflows:
             - test
       - deploy-develop:
           requires:
-            - buid
+            - build
             - hold
           filters:
             branches:
