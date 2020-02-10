@@ -36,7 +36,7 @@ jobs:
             - 'v1-dependencies-{{ checksum "package.json" }}'
             - v1-dependencies-
       - run: npm run test
-  deploy-qa:
+  deploy-develop:
     docker:
       - image: 'circleci/node:8.9.4'
       - image: 'circleci/mongo:3.4.10'
@@ -60,7 +60,7 @@ workflows:
             branches:
               only:
                 - master
-                - qa
+                - develop
       - test:
           requires:
             - build
@@ -68,14 +68,14 @@ workflows:
           type: approval
           requires:
             - test
-      - deploy-qa:
+      - deploy-develop:
           requires:
-            - test
             - build
+            - test
             - hold
           filters:
             branches:
-              only: qa
+              only: develop
       - deploy-master:
           requires:
             - build
