@@ -7,7 +7,7 @@
     "start": "node app.js",
     "deploy": "gulp deploy",
     "testdata": "node lib/testdata.js",
-    "test": "ava",
+    "test": "jest",
     "dev": "nodemon app.js",
     "lint": "eslint ./"
   },
