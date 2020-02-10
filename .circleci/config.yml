@@ -71,6 +71,7 @@ workflows:
       - deploy-develop:
           requires:
             - build
+            - test
             - hold
           filters:
             branches:
