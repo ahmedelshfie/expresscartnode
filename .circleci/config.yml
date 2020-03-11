@@ -35,7 +35,7 @@ jobs:
           keys:
             - 'v1-dependencies-{{ checksum "package.json" }}'
             - v1-dependencies-
-      - run: npm run test
+      - run: npm test
   deploy-develop:
     docker:
       - image: 'circleci/node:8.9.4'
