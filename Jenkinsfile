@@ -1,7 +1,7 @@
 pipeline {
 
    environment {
-        IMAGE_NAME = "docker.pkg.github.com/ahmedelshfie/expressCartNode/expressCart:${BUILD_NUMBER}"
+        IMAGE_NAME = "docker.pkg.github.com/ahmedelshfie/expressCartNode/expresscart:${BUILD_NUMBER}"
      } 
 
     agent any
