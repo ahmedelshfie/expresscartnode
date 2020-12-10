@@ -11,8 +11,8 @@ pipeline {
 	    stage ('Build-App') {
             steps {
                
-                    sh ' npm run install'
-					sh ' npm run test'
+                    sh ' npm install'
+					sh ' npm test'
             }
         }
 		
