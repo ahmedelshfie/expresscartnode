@@ -48,7 +48,7 @@ pipeline {
 		 stage ('Deploy-Kubernetes') {
             steps {
 			
-					sh ' kubectl set image deployment/polls-app polls-app=$IMAGE_NAME --namespace janna '
+					sh ' kubectl set image deployment/polls-app expresscart=$IMAGE_NAME --namespace janna '
             }
         }  
 		

@@ -19,6 +19,9 @@ RUN npm install
 
 VOLUME /var/expressCart/data
 
+# Copy our custom nginx config
+COPY nginx.conf /etc/nginx/nginx.conf
+
 EXPOSE 1111
 ENTRYPOINT ["npm", "start"]
 
